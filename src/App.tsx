@@ -1,9 +1,5 @@
-// src/App.tsx
 import "./App.css";
-
-// src/App.tsx
 import { useState } from "react";
-import "./App.css";
 
 // The to-do list item will have an ID number and a description of the thing to do (text string)
 type PCset = number[];
@@ -80,23 +76,21 @@ function App() {
 		return result;
 	}
 
-	const handleChange = (e) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const name = e.target.name;
 		const value = e.target.value;
 		setInputs((values) => ({ ...values, [name]: Number(value) }));
 	};
 
 	const randomFill = () => {
-		const results = {};
+		const results: Partial<inputNumbers> = {};
 		for (const key in inputs) {
-			results[key] = Math.floor(Math.random() * 12);
-			console.log(key);
+			results[key as keyof inputNumbers] = Math.floor(Math.random() * 12);
 		}
-		console.log(results);
-		setInputs(results);
+		setInputs(results as inputNumbers);
 	};
 
-	const handleSubmit = (e: React.SubmitEvent) => {
+	const handleSubmit: React.ComponentProps<"form">["onSubmit"] = (e) => {
 		e.preventDefault();
 	};
 
